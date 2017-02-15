@@ -1,5 +1,7 @@
 package graficos;
 import java.awt.*;
+import java.awt.geom.*;
+
 import javax.swing.*;
 
 
@@ -40,12 +42,26 @@ class marco_con_dibujos extends JFrame{
 
 class LaminaConFiguras extends JPanel{
 	
+	
 	public void paintComponent(Graphics g){
 		
 		super.paintComponent(g);
 		
 		//g.drawRect(50, 50, 200, 200);
-		g.drawRoundRect(50, 50, 100, 50, 30, 30);
+		//g.drawRoundRect(50, 50, 100, 50, 30, 30);
+		
+		Graphics2D g2 = (Graphics2D)g;
+		
+		Rectangle2D boton1 = new Rectangle2D.Double(100, 100, 150, 75);
+		
+		g2.draw(boton1); 
+		
+		Ellipse2D elipse = new Ellipse2D.Double();
+		 
+		elipse.setFrame(boton1);
+
+		g2.draw(elipse);
+		
 	}
 	
 }
