@@ -35,6 +35,9 @@ class marco_con_dibujos extends JFrame{
 		
 		add(lamina);
 		
+		lamina.setBackground(SystemColor.window);
+		
+		setResizable(false);
 	}
 	
 }
@@ -52,15 +55,23 @@ class LaminaConFiguras extends JPanel{
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		Rectangle2D boton1 = new Rectangle2D.Double(100, 100, 150, 75);
+		Rectangle2D boton1 = new Rectangle2D.Double(100, 100, 200, 150);
+		
+		g2.setPaint(Color.RED);
 		
 		g2.draw(boton1); 
+		
+		g2.fill(boton1);
 		
 		Ellipse2D elipse = new Ellipse2D.Double();
 		 
 		elipse.setFrame(boton1);
+		
+		g2.setPaint(new Color(0,140,255).brighter());
 
 		g2.draw(elipse);
+				
+		g2.fill(elipse); 
 		
 	}
 	
