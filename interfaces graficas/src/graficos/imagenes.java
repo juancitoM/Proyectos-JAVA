@@ -3,8 +3,10 @@ package graficos;
 
 
 import java.awt.*;
-import javax.swing.*;
+import java.io.*;
 
+import javax.swing.*;
+import javax.imageio.*;
 
 public class imagenes {
 
@@ -41,12 +43,20 @@ public class imagenes {
 
 class LaminaConImagen extends JPanel{
 		
-		
+		private Image imagen;
+	
 		public void paintComponent(Graphics g){
 			
 			super.paintComponent(g);
+			try{
+			File miImagen = new File("c:/Users/EA6259/Desktop/images.jpg");
+			}
+			catch(IOException e){
+				System.out.println("hola putos");
+			}
 			
 			
+			imagen = ImageIO.read(miImagen);
 			
 		}
 		
