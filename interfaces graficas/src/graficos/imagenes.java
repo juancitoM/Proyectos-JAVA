@@ -53,8 +53,6 @@ class LaminaConImagen extends JPanel{
 		
 		private Image imagen;
 		
-		
-		
 		public LaminaConImagen(){
 			
 			try{
@@ -74,8 +72,8 @@ class LaminaConImagen extends JPanel{
 			//File miImagen = new File("C:\\Users\\juan\\Desktop\\imagenes\\scarlett johansson.jpg");
 			
 			try{
-			//imagen = ImageIO.read(new File("C:\\Users\\juan\\Desktop\\imagenes\\scarlett johansson.jpg"));
-			imagen = ImageIO.read(new File("https://im-upload.nudeicons.com/Imgs/gall01/S/Scarlett-Johansson/S02/Scarlett-Johansson-naked-(nudeicons.com)-02.jpg"));
+			imagen = ImageIO.read(new File("C:\\Users\\juan\\Desktop\\imagenes\\scarlett johansson.jpg"));
+
 			}
 			catch(IOException e){
 				System.out.println("No se pudo cargar la imagen");
