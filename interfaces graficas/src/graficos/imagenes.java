@@ -53,18 +53,7 @@ class LaminaConImagen extends JPanel{
 		
 		private Image imagen;
 		
-		public LaminaConImagen(){
-			
-			try{
-				imagen = ImageIO.read(new File("C:\\Users\\juan\\Desktop\\imagenes\\scarlett johansson.jpg"));
-				}
-				catch(IOException e){
-					System.out.println("No se pudo cargar la imagen");
-				}
-			
-		}
 		
-
 		public void paintComponent(Graphics g){
 			
 			super.paintComponent(g);
