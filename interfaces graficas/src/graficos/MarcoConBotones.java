@@ -1,5 +1,8 @@
 package graficos;
 
+import java.awt.*;
+import java.awt.event.*;
+
 import javax.swing.*;
 
 public class MarcoConBotones {
@@ -35,9 +38,44 @@ class MarcoBotones extends JFrame{
 }
 
 
-class LaminaBotones extends JPanel{
+class LaminaBotones extends JPanel implements ActionListener{
 	
+	JButton BotonAzul = new JButton("Lamina azul");
 	
+	JButton BotonAmarillo = new JButton("Lamina amarilla");
 	
+	JButton BotonSys = new JButton("Lamina System color");
+	
+	public LaminaBotones(){
+		
+		add(BotonAzul);
+		
+		add(BotonAmarillo);
+		
+		add(BotonSys);
+		
+		BotonAzul.addActionListener(this);
+		
+		BotonAmarillo.addActionListener(this);
+		
+		BotonSys.addActionListener(this);
+		
+	}
+	public void actionPerformed(ActionEvent e){
+		
+		Object botonPulsado = e.getSource();
+		
+		if (botonPulsado == BotonAzul){
+			setBackground(Color.blue);
+		}else if (botonPulsado == BotonAmarillo){
+			setBackground(Color.yellow);
+		}else{
+			setBackground(SystemColor.window);
+		}
+	
+			
+		
+		
+	}
 	
 }
