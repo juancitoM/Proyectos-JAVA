@@ -47,6 +47,7 @@ class Ventana_gen extends JFrame{
 		setResizable(false);
 		add(new lamina_img());
 		
+		
 	}
 
 }
@@ -75,34 +76,52 @@ class lamina_img extends JPanel{
 
 class boton extends JPanel{
 	
-	JButton Boton_ventana;
+	JButton Boton_ventana, Boton_ventana2;
 	
 	public boton(){
 		
 		Boton_ventana =  new JButton("abrir ventana");
+		Boton_ventana2 = new JButton("abrir otra ventana");
 		
 		add(Boton_ventana);
+		add(Boton_ventana2);
 		
-		Boton_ventana.addActionListener(new button_clicked());
+		//Boton_ventana.addActionListener(new button_clicked());
+		Boton_ventana.addActionListener(escuchadorbtnVentana);
 	}
 	
-	private class button_clicked implements ActionListener{
+//	private class button_clicked implements ActionListener{
+//		
+//		Object source;
+//	
+//		public void actionPerformed(ActionEvent e){
+//			source = e.getSource();
+//			
+//			if (source == Boton_ventana){
+//				Ventana_gen ventana = new Ventana_gen();
+//				ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//			}
+//		}
+//	}
+	
+	ActionListener escuchadorbtnVentana = new ActionListener(){
 		
 		Object source;
-	
-		public void actionPerformed(ActionEvent e){
-			source = e.getSource();
+		
+		public void actionPerformed(ActionEvent evt){
 			
+			source = evt.getSource();
 			if (source == Boton_ventana){
 				Ventana_gen ventana = new Ventana_gen();
 				ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
 		}
-	}
+		
+	};
+
 }
 
 	
-
 	
 	
 
