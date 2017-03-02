@@ -1,6 +1,6 @@
 package graficos;
 
-import javax.imageio.ImageIO;
+import javax.imageio.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,9 +10,9 @@ public class Botones_ventana{
 
 	public static void main(String[] args) {
 		
-		Ventana V_principal = new Ventana(100, 300, 500, 350);
+		ventana V_principal = new ventana(100, 300, 500, 350);
 	
-		V_principal.setTitle("Ventana Principal");
+		V_principal.setTitle("btn_ventana Principal");
 		
 		V_principal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -22,34 +22,29 @@ public class Botones_ventana{
 }
 
 
-class Ventana extends JFrame {
+class ventana extends JFrame {
 	
 	
 	
-	public Ventana(int x, int y, int width, int height){
+	public ventana(int x, int y, int width, int height){
 		
 		setVisible(true);
-		
-		setBounds(x, y, width, height);
-		
+		setBounds(x, y, width, height);		
 		add(new boton());
 		
 	}
-
 }
 
-class Ventana_gen extends JFrame{
+class ventana_gen extends JFrame{
 
-	public Ventana_gen(){
+	public ventana_gen(){
 		
-		setVisible(true);
+		
 		setBounds(700, 300, 500, 350);
 		setResizable(false);
-		add(new lamina_img());
-		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
-
 }
 
 class lamina_img extends JPanel{
@@ -62,7 +57,7 @@ class lamina_img extends JPanel{
 		
 		
 		try{
-			imagen = ImageIO.read(new File("C:\\Users\\EA6259\\Desktop\\the beatles.jpg"));
+			imagen = ImageIO.read(new File("C:\\Users\\juan\\Desktop\\the beatles.jpg"));
 		}
 		catch(IOException e){
 			System.out.println("No se pudo cargar la imagen");
@@ -70,25 +65,56 @@ class lamina_img extends JPanel{
 		
 		g.drawImage(imagen, 0, 0, null);
 		
-	}
-	
+	}	
 }
 
-class boton extends JPanel{
+class boton extends JPanel{ //implements ActionListener {
 	
-	JButton Boton_ventana, Boton_ventana2;
-	
+	JButton btn_ventana, btn_ventana2;
+	Object source;
+	ventana_gen ventana = new ventana_gen();
 	public boton(){
 		
-		Boton_ventana =  new JButton("abrir ventana");
-		Boton_ventana2 = new JButton("abrir otra ventana");
+		btn_ventana =  new JButton("abrir ventana");
+		btn_ventana2 = new JButton("cerrar ventana");
 		
-		add(Boton_ventana);
-		add(Boton_ventana2);
+		add(btn_ventana);
+		add(btn_ventana2);
 		
-		//Boton_ventana.addActionListener(new button_clicked());
-		Boton_ventana.addActionListener(escuchadorbtnVentana);
+		//Boton_btn_ventana.addActionListener(new button_clicked());
+		//btn_ventana.addActionListener(this);
+		btn_ventana.addMouseListener(new EventoRaton());
+		btn_ventana2.addMouseListener(new EventoRaton());
+		
 	}
+
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		
+//			source = e.getSource();
+//			if (source == btn_ventana){
+//				btn_ventana_gen btn_ventana = new btn_ventana_gen();
+//				btn_ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//				btn_ventana.add(new lamina_img());
+//				
+//			}
+//	}
+	
+	private class EventoRaton extends MouseAdapter{
+		
+		public void mouseClicked(MouseEvent e){
+			source = e.getSource();
+			if (source == btn_ventana){
+				ventana.setVisible(true);
+				ventana.add(new lamina_img());
+			}else if(source == btn_ventana2) ventana.dispose();
+		}
+		
+
+		
+	}
+		
+//---------------------Formas de colocar un escuchador o listener-----------------
 	
 //	private class button_clicked implements ActionListener{
 //		
@@ -97,31 +123,32 @@ class boton extends JPanel{
 //		public void actionPerformed(ActionEvent e){
 //			source = e.getSource();
 //			
-//			if (source == Boton_ventana){
-//				Ventana_gen ventana = new Ventana_gen();
-//				ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//			if (source == Boton_btn_ventana){
+//				btn_ventana_gen btn_ventana = new btn_ventana_gen();
+//				btn_ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //			}
 //		}
-//	}
-	
-	ActionListener escuchadorbtnVentana = new ActionListener(){
-		
-		Object source;
-		
-		public void actionPerformed(ActionEvent evt){
-			
-			source = evt.getSource();
-			if (source == Boton_ventana){
-				Ventana_gen ventana = new Ventana_gen();
-				ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			}
-		}
-		
-	};
+//	}	
+//	ActionListener escuchadorbtn_ventana = new ActionListener(){
+//		
+//		Object source;
+//		
+//		public void actionPerformed(ActionEvent evt){
+//			
+//			source = evt.getSource();
+//			if (source == btn_ventana){
+//				btn_ventana_gen btn_ventana = new btn_ventana_gen();
+//				btn_ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//				btn_ventana.add(new lamina_img());
+//				
+//			}
+//		}
+//		
+//	};
 
 }
 
-	
+
 	
 	
 
