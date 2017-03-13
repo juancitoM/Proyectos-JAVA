@@ -81,7 +81,7 @@ class boton extends JPanel{ //implements ActionListener {
 		add(btn_ventana);
 		add(btn_ventana2);
 		
-		//Boton_btn_ventana.addActionListener(new button_clicked());
+		//btn_ventana.addActionListener(new button_clicked());
 		//btn_ventana.addActionListener(this);
 		btn_ventana.addMouseListener(new EventoRaton());
 		btn_ventana2.addMouseListener(new EventoRaton());
