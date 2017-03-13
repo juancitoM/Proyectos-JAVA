@@ -60,7 +60,7 @@ class lamina_botones extends JPanel{
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			Color c = (Color)getValue("Color_de_fondo");
+			Color c = (Color)getValue("color_de_fondo");
 			setBackground(c);
 		}
 
