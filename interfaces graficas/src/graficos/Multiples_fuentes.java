@@ -44,10 +44,20 @@ class lamina_botones extends JPanel{
 		add(new JButton(accionAmarillo));
 		add(new JButton(accionAzul));
 		add(new JButton(accionRojo));
+		
+		InputMap mapaEntrada = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);		
+		mapaEntrada.put(KeyStroke.getKeyStroke("ctrl A"), "fondo amarillo");
+		mapaEntrada.put(KeyStroke.getKeyStroke("ctrl B"), "fondo azul");
+		mapaEntrada.put(KeyStroke.getKeyStroke("ctrl R"), "fondo rojo");
+		
+		ActionMap mapaAccion = getActionMap();
+		mapaAccion.put("fondo amarillo", accionAmarillo);
+		mapaAccion.put("fondo azul", accionAzul);
+		mapaAccion.put("fondo rojo", accionRojo);
 	}
 	
 	
-	private class AccionColor extends AbstractAction{
+	private class AccionColor extends AbstractAction{ 
 
 		public  AccionColor(String nombre, Icon icono, Color color_boton){
 			
@@ -62,6 +72,7 @@ class lamina_botones extends JPanel{
 			
 			Color c = (Color)getValue("color_de_fondo");
 			setBackground(c);
+			System.out.println("Nombre: " + getValue(Action.NAME) + ". Descripcion: " + getValue(Action.SHORT_DESCRIPTION));
 		}
 
 	}
