@@ -37,7 +37,7 @@ class lamina_botones extends JPanel{
 	
 	public lamina_botones(){
 		
-		AccionColor accionAmarillo = new AccionColor("Amarillo", new ImageIcon("src/imagenes/btn_amarillo.png"), Color.yellow);
+		AccionColor accionAmarillo = new AccionColor("Amarillo", null, Color.yellow);
 		AccionColor accionAzul = new AccionColor("Azul", null, Color.blue);
 		AccionColor accionRojo = new AccionColor("Rojo", null, Color.red);
 		
