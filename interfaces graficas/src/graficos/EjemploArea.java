@@ -10,25 +10,25 @@ public class EjemploArea {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		marcoArea miMarco = new marcoArea();
+		marcoConArea miMarco = new marcoConArea();
 		
 		miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
+		miMarco.setVisible(true);
 	}
 
 }
 
 
 
-class marcoArea extends JFrame{
+class marcoConArea extends JFrame{
 	
-	public marcoArea(){
+	public marcoConArea(){
 		
 		setTitle("Ejemplo Area de texto");
-		setBounds(500, 300, 400, 300);
-		add(new laminaArea());
-		setVisible(true);
-		
+		setBounds(500, 300, 400, 300);	
+		setLayout(new BorderLayout());
+		add(new laminaBotones());
 		
 	}
 	
@@ -36,19 +36,28 @@ class marcoArea extends JFrame{
 }
 
 
-class laminaArea extends JPanel{
+class laminaBotones extends JPanel{
 	
-	public laminaArea(){
+	
+	private JButton btnInsertar, btnSaltoLinea;
+	private JPanel laminaArea;
+	private JTextArea AreaDeTexto = new JTextArea(30,30);
+	public laminaBotones(){
 		
-		JTextArea miarea = new JTextArea(8,20);
 		
-		JScrollPane laminaBarra = new JScrollPane(miarea);
+		setLayout(new BorderLayout());
 		
-		miarea.setLineWrap(true);
+		laminaArea  = new JPanel();
 		
-		add(laminaBarra);
+		laminaArea.add(AreaDeTexto);
+		
+		
+		btnInsertar = new JButton("Insertar");
+		
+		
+		
 		
 	}
-	
+	 
 	
 }
