@@ -31,7 +31,7 @@ public class MainKey implements NativeKeyListener {
 		for(int i = 0; i < appPath.length() && c < 3; i++){
 			if(appPath.charAt(i) == '\\'){
 				c++;
-				path += "" + appPath.charAt(i);
+				path += appPath.charAt(i);
 			}
 		}
 		
