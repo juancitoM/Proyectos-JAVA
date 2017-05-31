@@ -25,7 +25,7 @@ class MarcoBotones2 extends JFrame{
 		
 		setBounds(700, 300, 500, 300);
 		
-		LaminaBotones lamina =  new LaminaBotones();
+		LaminaBotones2 lamina =  new LaminaBotones2();
 		
 		add(lamina);
 		
