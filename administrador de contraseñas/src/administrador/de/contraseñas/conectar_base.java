@@ -1,12 +1,5 @@
 package administrador.de.contraseñas;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,10 +11,9 @@ public class conectar_base {
     private ResultSet rta;
     public conectar_base(){
         try {
-
             //1.Crear conexion 
-            Connection mi_conexion = DriverManager.getConnection("jdbc:mysql://192.168.0.78:3306/juan", "root", "juanchosanfer19");
-            //Connection mi_conexion = DriverManager.getConnection("jdbc:mysql://raspibjuan.redirectme.net:3306/juan", "root", "juanchosanfer19");
+            //Connection mi_conexion = DriverManager.getConnection("jdbc:mysql://192.168.0.78:3306/juan", "root", "juanchosanfer19");
+            Connection mi_conexion = DriverManager.getConnection("jdbc:mysql://raspibjuan.redirectme.net:3306/juan", "root", "juanchosanfer19");
 
             //2. Crear objeto Statement
              miStatement = mi_conexion.createStatement();
@@ -31,12 +23,17 @@ public class conectar_base {
             //   System.out.println("Contraseña: " + rta.getString("Contraseña") + " Usuario: " + rta.getString("Usuario"));
             //}
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No hay conexion con la base de datos");
+        } catch (SQLException e) {        
+            try {
+                Connection mi_conexion = DriverManager.getConnection("jdbc:mysql://192.168.0.78:3306/juan", "root", "juanchosanfer19");
+                //Connection mi_conexion = DriverManager.getConnection("jdbc:mysql://raspibjuan.redirectme.net:3306/juan", "root", "juanchosanfer19");
+                miStatement = mi_conexion.createStatement();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "No hay conexion con la base de datos");
+            }
         }
     }
-    
-    
+     
     public ResultSet consulta_base(String tabla, String cuenta){
         try {
             //3. Ejecutar SQL
